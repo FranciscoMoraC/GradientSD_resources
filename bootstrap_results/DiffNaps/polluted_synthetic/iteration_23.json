@@ -1,0 +1,20 @@
+{
+ "algorithm": "DiffNaps",
+ "dataset": "polluted_synthetic",
+ "iteration": 23,
+ "seed": 900515058,
+ "time_s": 12.714643239974976,
+ "cpu_time_s": 12.301639415000013,
+ "youden_in_bag": 0.1031976096993095,
+ "tpr_in_bag": 0.7189669536239933,
+ "fpr_in_bag": 0.6157693439246837,
+ "youden_oob": 0.0434895992005947,
+ "tpr_oob": 0.6909774436090226,
+ "fpr_oob": 0.6474878444084279,
+ "n_subgroups": 34,
+ "avg_size": 8.441176470588236,
+ "max_jaccard": 0.1277777777777777,
+ "n_in_bag": 7000,
+ "n_oob": 2564,
+ "descriptions": null
+}

@@ -1,0 +1,20 @@
+{
+ "algorithm": "NSD",
+ "dataset": "Facebook",
+ "iteration": 0,
+ "seed": 1249777080,
+ "time_s": 58.68401598930359,
+ "cpu_time_s": 58.687010716,
+ "youden_in_bag": 0.8654369974790042,
+ "tpr_in_bag": 0.9651162790697676,
+ "fpr_in_bag": 0.0996792815907633,
+ "youden_oob": 0.7736541478202023,
+ "tpr_oob": 0.9243630573248408,
+ "fpr_oob": 0.1507089095046385,
+ "n_subgroups": 2,
+ "avg_size": 577.5,
+ "max_jaccard": 0.5356358310959238,
+ "n_in_bag": 22470,
+ "n_oob": 8225,
+ "descriptions": null
+}

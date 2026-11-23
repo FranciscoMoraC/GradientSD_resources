@@ -1,0 +1,20 @@
+{
+ "algorithm": "MCTS4DM",
+ "dataset": "Facebook",
+ "iteration": 2,
+ "seed": 603567974,
+ "time_s": 13.826,
+ "cpu_time_s": 56.48313448100004,
+ "youden_in_bag": 0.3632921931172337,
+ "tpr_in_bag": 0.8588662790697674,
+ "fpr_in_bag": 0.4955740859525336,
+ "youden_oob": 0.3640909662017841,
+ "tpr_oob": 0.8571428571428571,
+ "fpr_oob": 0.493051890941073,
+ "n_subgroups": 50,
+ "avg_size": 1.0,
+ "max_jaccard": 0.3591549295774648,
+ "n_in_bag": 22470,
+ "n_oob": 8233,
+ "descriptions": null
+}

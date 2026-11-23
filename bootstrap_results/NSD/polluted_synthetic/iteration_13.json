@@ -1,0 +1,20 @@
+{
+ "algorithm": "NSD",
+ "dataset": "polluted_synthetic",
+ "iteration": 13,
+ "seed": 797063737,
+ "time_s": 18.00258183479309,
+ "cpu_time_s": 18.006274836000046,
+ "youden_in_bag": 0.7305265388753525,
+ "tpr_in_bag": 0.8264371008053318,
+ "fpr_in_bag": 0.0959105619299794,
+ "youden_oob": 0.7349909346122354,
+ "tpr_oob": 0.8320783132530121,
+ "fpr_oob": 0.0970873786407767,
+ "n_subgroups": 3,
+ "avg_size": 1.6666666666666667,
+ "max_jaccard": 0.0,
+ "n_in_bag": 7000,
+ "n_oob": 2564,
+ "descriptions": null
+}

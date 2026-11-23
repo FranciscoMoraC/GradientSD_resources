@@ -1,0 +1,20 @@
+{
+ "algorithm": "NSD",
+ "dataset": "brca_n",
+ "iteration": 5,
+ "seed": 1421591295,
+ "time_s": 5.614013671875,
+ "cpu_time_s": 5.615936132000002,
+ "youden_in_bag": 1.0,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.0,
+ "youden_oob": 0.7560975609756098,
+ "tpr_oob": 0.7560975609756098,
+ "fpr_oob": 0.0,
+ "n_subgroups": 1,
+ "avg_size": 23.0,
+ "max_jaccard": 0.0,
+ "n_in_bag": 222,
+ "n_oob": 80,
+ "descriptions": null
+}

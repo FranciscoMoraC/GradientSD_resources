@@ -1,0 +1,62 @@
+# Bootstrap evaluation of NSD: runs ONE bootstrap iteration on one dataset.
+# The hyperparameters are the same ones as in run_<dataset>.py.
+#
+# Usage (from the nsdExperiments folder):
+#     python run_bootstrap.py <dataset> <iteration>
+
+# %%
+import sys
+import time
+
+import torch
+
+sys.path.insert(0, "../neuralsd")
+from iterative_nsd import IterativeNSD
+
+sys.path.append("..")
+import bootstrap
+
+# %%
+dataset = sys.argv[1]
+iteration = int(sys.argv[2])
+
+if bootstrap.already_done("NSD", dataset, iteration):
+    print(f"NSD {dataset} iteration {iteration} already done")
+    sys.exit(0)
+
+if torch.cuda.is_available():
+    torch.set_default_device("cuda:0")
+
+k = 1
+
+# %%
+df, target = bootstrap.load_dataset(dataset)
+train, test, seed = bootstrap.bootstrap_sample(df, target, iteration)
+bootstrap.set_seed(seed)
+
+# %%
+if dataset == "synthetic":
+    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
+    fit_params = {"max_iterations": 10}
+elif dataset == "polluted_synthetic":
+    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
+    fit_params = {"max_iterations": 10, "min_quality": 10}
+elif dataset == "Facebook":
+    nsd = IterativeNSD(k, "WRAcc")
+    fit_params = {"batch_size": 1024, "max_iterations": 10, "min_quality": 0.01}
+elif dataset == "brca_n":
+    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.5})
+    fit_params = {"max_iterations": 10, "min_quality": 10}
+
+# %%
+t0 = time.time()
+cpu_t0 = time.process_time()
+nsd.fit(train, target, weight_init="best", verbose=False, **fit_params)
+time_taken = time.time() - t0
+cpu_time_taken = time.process_time() - cpu_t0
+
+# %%
+# Each description is a list of (attribute, value) selectors
+descriptions = [d[0] for d in nsd.get_subgroup_descriptions()]
+
+bootstrap.save_result("NSD", dataset, iteration, seed, time_taken, cpu_time_taken, descriptions, train, test, target)

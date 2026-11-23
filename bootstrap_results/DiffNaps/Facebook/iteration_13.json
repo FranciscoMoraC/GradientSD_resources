@@ -1,0 +1,20 @@
+{
+ "algorithm": "DiffNaps",
+ "dataset": "Facebook",
+ "iteration": 13,
+ "seed": 1017604649,
+ "time_s": 747.847936630249,
+ "cpu_time_s": 736.7315211709993,
+ "youden_in_bag": 0.3102869497441711,
+ "tpr_in_bag": 0.4056686046511628,
+ "fpr_in_bag": 0.0953816549069916,
+ "youden_oob": 0.3078853134126939,
+ "tpr_oob": 0.4076585560430794,
+ "fpr_oob": 0.0997732426303854,
+ "n_subgroups": 27,
+ "avg_size": 4.333333333333333,
+ "max_jaccard": 0.5252951096121417,
+ "n_in_bag": 22470,
+ "n_oob": 8240,
+ "descriptions": null
+}

@@ -1,0 +1,20 @@
+{
+ "algorithm": "Beam",
+ "dataset": "brca_n",
+ "iteration": 12,
+ "seed": 1776696596,
+ "time_s": 55.529242277145386,
+ "cpu_time_s": 55.517293999,
+ "youden_in_bag": 0.6756756756756757,
+ "tpr_in_bag": 0.6756756756756757,
+ "fpr_in_bag": 0.0,
+ "youden_oob": 0.3488372093023256,
+ "tpr_oob": 0.3488372093023256,
+ "fpr_oob": 0.0,
+ "n_subgroups": 10,
+ "avg_size": 1.9,
+ "max_jaccard": 1.0,
+ "n_in_bag": 222,
+ "n_oob": 84,
+ "descriptions": null
+}

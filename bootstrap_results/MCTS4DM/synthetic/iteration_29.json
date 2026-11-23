@@ -1,0 +1,20 @@
+{
+ "algorithm": "MCTS4DM",
+ "dataset": "synthetic",
+ "iteration": 29,
+ "seed": 1989498125,
+ "time_s": 67.849,
+ "cpu_time_s": 84.19187621499987,
+ "youden_in_bag": 0.2226666666666666,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.7773333333333333,
+ "youden_oob": 0.2173507462686567,
+ "tpr_oob": 1.0,
+ "fpr_oob": 0.7826492537313433,
+ "n_subgroups": 50,
+ "avg_size": 1.9,
+ "max_jaccard": 0.2267839687194525,
+ "n_in_bag": 7000,
+ "n_oob": 2537,
+ "descriptions": null
+}

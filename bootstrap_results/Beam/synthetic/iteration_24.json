@@ -1,0 +1,20 @@
+{
+ "algorithm": "Beam",
+ "dataset": "synthetic",
+ "iteration": 24,
+ "seed": 1926178442,
+ "time_s": 1219.692307472229,
+ "cpu_time_s": 1219.658257519,
+ "youden_in_bag": 0.6859999999999999,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.314,
+ "youden_oob": 0.6465753424657534,
+ "tpr_oob": 1.0,
+ "fpr_oob": 0.3534246575342465,
+ "n_subgroups": 50,
+ "avg_size": 2.56,
+ "max_jaccard": 1.0,
+ "n_in_bag": 7000,
+ "n_oob": 2566,
+ "descriptions": null
+}

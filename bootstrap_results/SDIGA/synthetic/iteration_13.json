@@ -1,0 +1,20 @@
+{
+ "algorithm": "SDIGA",
+ "dataset": "synthetic",
+ "iteration": 13,
+ "seed": 797063737,
+ "time_s": 6247.003496646881,
+ "cpu_time_s": 6245.31820158,
+ "youden_in_bag": 0.33925,
+ "tpr_in_bag": 0.33925,
+ "fpr_in_bag": 0.0,
+ "youden_oob": 0.2526231650532245,
+ "tpr_oob": 0.2935153583617747,
+ "fpr_oob": 0.0408921933085501,
+ "n_subgroups": 30,
+ "avg_size": 3.9,
+ "max_jaccard": 0.0588235294117647,
+ "n_in_bag": 7000,
+ "n_oob": 2541,
+ "descriptions": null
+}

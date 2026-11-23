@@ -1,0 +1,20 @@
+{
+ "algorithm": "MCTS4DM",
+ "dataset": "brca_n",
+ "iteration": 0,
+ "seed": 1977769028,
+ "time_s": 1.38,
+ "cpu_time_s": 4.706217787,
+ "youden_in_bag": 0.054054054054054,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.945945945945946,
+ "youden_oob": 0.0,
+ "tpr_oob": 1.0,
+ "fpr_oob": 1.0,
+ "n_subgroups": 50,
+ "avg_size": 1.44,
+ "max_jaccard": 0.4,
+ "n_in_bag": 222,
+ "n_oob": 85,
+ "descriptions": null
+}

@@ -1,0 +1,20 @@
+{
+ "algorithm": "SDIGA",
+ "dataset": "Facebook",
+ "iteration": 12,
+ "seed": 215025095,
+ "time_s": 15723.84396123886,
+ "cpu_time_s": 15709.729087254,
+ "youden_in_bag": 0.2936927554932351,
+ "tpr_in_bag": 0.2992732558139535,
+ "fpr_in_bag": 0.0055805003207184,
+ "youden_oob": 0.2908712731765228,
+ "tpr_oob": 0.296794618124258,
+ "fpr_oob": 0.0059233449477351,
+ "n_subgroups": 30,
+ "avg_size": 3.1,
+ "max_jaccard": 0.4050632911392405,
+ "n_in_bag": 22470,
+ "n_oob": 8267,
+ "descriptions": null
+}
