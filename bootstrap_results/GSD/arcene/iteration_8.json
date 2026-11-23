@@ -1,5 +1,5 @@
 {
- "algorithm": "NSD",
+ "algorithm": "GSD",
  "dataset": "arcene",
  "iteration": 8,
  "seed": 1203795385,

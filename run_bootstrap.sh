@@ -7,7 +7,7 @@
 # iteration is killed for running out of memory) to complete the missing ones.
 #
 # Two chains run at the same time, using at most 12 + 13 = 25 threads:
-#   * NSD, DiffNaps and MCTS4DM run one iteration at a time with at most 12 threads,
+#   * GSD, DiffNaps and MCTS4DM run one iteration at a time with at most 12 threads,
 #     and are compared by wall-clock time.
 #   * Beam and SDIGA are single-threaded and much slower, so several iterations run in
 #     parallel and they are compared by CPU time. SDIGA uses fewer parallel iterations

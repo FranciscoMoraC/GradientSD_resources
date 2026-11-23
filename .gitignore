@@ -2,4 +2,4 @@
 MCTS4DM/datasets
 rrl/dataset
 dssdSrc/data/datasets
-__pycache__/*
+__pycache__/

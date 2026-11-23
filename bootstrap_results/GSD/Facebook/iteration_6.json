@@ -1,5 +1,5 @@
 {
- "algorithm": "NSD",
+ "algorithm": "GSD",
  "dataset": "Facebook",
  "iteration": 6,
  "seed": 800931726,

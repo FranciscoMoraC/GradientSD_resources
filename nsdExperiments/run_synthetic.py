@@ -7,7 +7,7 @@ import time
 import random
 import sys
 sys.path.insert(0, '../neuralsd')
-from iterative_nsd import IterativeNSD
+from iterative_gsd import IterativeGSD
 
 # %%
 k = 1
@@ -27,14 +27,14 @@ target_tuple = ("Target", "1")
 df.shape
 
 # %%
-nsd = IterativeNSD(k,"Qc",additional_params_for_quality_measure={"c": 0.9})
+gsd = IterativeGSD(k,"Qc",additional_params_for_quality_measure={"c": 0.9})
 t0 = time.time()
-nsd.fit(df, target_tuple, weight_init="best", verbose=False, max_iterations=10)
+gsd.fit(df, target_tuple, weight_init="best", verbose=False, max_iterations=10)
 t1 = time.time()
 print("Time taken:", t1 - t0)
 
 # %%
-desc = nsd.get_subgroup_descriptions()
+desc = gsd.get_subgroup_descriptions()
 
 # %%
 

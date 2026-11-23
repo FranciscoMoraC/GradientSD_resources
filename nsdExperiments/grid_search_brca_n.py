@@ -1,9 +1,7 @@
 # %%
 import sys
-sys.path.insert(0, '../')
-from neuralsd.iterative_nsd import IterativeNSD
-from neuralsd.qc import Qc
-from neuralsd.wracc import WRAcc
+sys.path.insert(0, '../neuralsd')
+from iterative_gsd import IterativeGSD
 import pandas as pd
 import torch
 from tqdm import tqdm
@@ -41,14 +39,14 @@ target_tuple = ("Target", "1")
 qualities = ["WRAcc", "Qc_0.5", "Qc_0.9", "Qc_2.0", "Qc_5.0", "Qc_10.0"]
 for q in qualities:
     if q == "WRAcc":
-        nsd = IterativeNSD(WRAcc())
+        gsd = IterativeGSD(k, "WRAcc")
         min_quality = 0.01
     else:
         c_value = float(q.split("_")[1])
-        nsd = IterativeNSD(Qc(),additional_params_for_quality_measure={"c": c_value})
+        gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": c_value})
         min_quality = 10
     # t0 = time.time()
-    nsd.fit(df_train, target_tuple, weight_init="best", verbose=False, max_iterations=10, min_quality=min_quality)
+    gsd.fit(df_train, target_tuple, weight_init="best", verbose=False, max_iterations=10, min_quality=min_quality)
     # t1 = time.time()
     # print("Time taken:", t1 - t0)
 
@@ -56,7 +54,7 @@ for q in qualities:
 
 
     # %%
-    desc = nsd.get_subgroup_descriptions()
+    desc = gsd.get_subgroup_descriptions()
 
     # %%
     descriptions = [d[0] for d in desc]

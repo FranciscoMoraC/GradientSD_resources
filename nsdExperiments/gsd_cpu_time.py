@@ -1,14 +1,14 @@
-"""Runtime of NeuralSD on CPU for the datasets of the comparison with BSD (Experiment 1).
+"""Runtime of GradientSD on CPU for the datasets of the comparison with BSD (Experiment 1).
 
-BSD runs on CPU, while the runtimes of NeuralSD reported in the paper were measured on
-GPU. This script measures NeuralSD on CPU, both single-threaded (same conditions as BSD)
+BSD runs on CPU, while the runtimes of GradientSD reported in the paper were measured on
+GPU. This script measures GradientSD on CPU, both single-threaded (same conditions as BSD)
 and using every available core, and also checks that the WRAcc found is the same as on
-GPU (NeuralSD with the "best" initialization has no random component).
+GPU (GradientSD with the "best" initialization has no random component).
 
 Each configuration is repeated REPETITIONS times and the median runtime is reported.
 
 Usage (from the nsdExperiments folder):
-    python nsd_cpu_time.py
+    python gsd_cpu_time.py
 """
 
 import time
@@ -22,7 +22,7 @@ import torch
 sys.path.insert(0, "../neuralsd")
 sys.path.insert(0, "../")
 import main
-from nsd import NeuralSD
+from gsd import GradientSD
 
 REPETITIONS = 5
 
@@ -42,12 +42,12 @@ DATASETS = {
 
 
 def timed_fit(df, target):
-    """Fit NeuralSD exactly as in e1.ipynb and return (runtime in seconds, best WRAcc)."""
-    nsd = NeuralSD(1, "WRAcc")
+    """Fit GradientSD exactly as in e1.ipynb and return (runtime in seconds, best WRAcc)."""
+    gsd = GradientSD(1, "WRAcc")
     start = time.time()
-    nsd.fit(df, target, weight_init="best", verbose=False)
+    gsd.fit(df, target, weight_init="best", verbose=False)
     elapsed = time.time() - start
-    return elapsed, nsd.forward()[0].max().item()
+    return elapsed, gsd.forward()[0].max().item()
 
 
 def main_cpu():
@@ -64,7 +64,7 @@ def main_cpu():
             row["wracc"] = results[0][1]
         rows.append(row)
         print(row, flush=True)
-    pd.DataFrame(rows).to_csv("nsd_cpu_times.csv", index=False)
+    pd.DataFrame(rows).to_csv("gsd_cpu_times.csv", index=False)
 
 
 if __name__ == "__main__":

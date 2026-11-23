@@ -1,5 +1,5 @@
 {
- "algorithm": "NSD",
+ "algorithm": "GSD",
  "dataset": "synthetic",
  "iteration": 16,
  "seed": 2134761973,

@@ -2,17 +2,17 @@ import torch
 from pandas import DataFrame, Series
 import time
 from selector_matrix import SelectorMatrix
-from nsd import NeuralSD
+from gsd import GradientSD
 
-class IterativeNSD(NeuralSD):
+class IterativeGSD(GradientSD):
     """
-    Iterative Neural Subgroup Discovery (NSD) class.
-    This class extends the NeuralSD class to perform the iterative methodology for subgroup discovery.
+    Iterative GradientSD class.
+    This class extends the GradientSD class to perform the iterative methodology for subgroup discovery.
     """
 
     def __init__(self, k, quality_measure, additional_params_for_quality_measure=dict()):
         """
-        Initialize the IterativeNSD class.
+        Initialize the IterativeGSD class.
 
         Args:
             k (int): The number of subgroups to discover.

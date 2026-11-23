@@ -1,5 +1,5 @@
 {
- "algorithm": "NSD",
+ "algorithm": "GSD",
  "dataset": "brca_n",
  "iteration": 11,
  "seed": 457320543,

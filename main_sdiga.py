@@ -10,7 +10,7 @@ from subgroups.quality_measures.binomial_test_optimistic_estimate_1 import Binom
 from subgroups.quality_measures.piatetsky_shapiro import PiatetskyShapiro
 from subgroups.quality_measures.piatetsky_shapiro_optimistic_estimate_1 import PiatetskyShapiroOptimisticEstimate1
 from subgroups import datasets
-# from nsd.nsd import NeuralSD
+# from gsd.gsd import GradientSD
 
 
 from pandas import DataFrame,read_csv, Series, concat

@@ -1,4 +1,4 @@
-# Bootstrap evaluation of NSD: runs ONE bootstrap iteration on one dataset.
+# Bootstrap evaluation of GSD: runs ONE bootstrap iteration on one dataset.
 # The hyperparameters are the same ones as in run_<dataset>.py.
 #
 # Usage (from the nsdExperiments folder):
@@ -11,7 +11,7 @@ import time
 import torch
 
 sys.path.insert(0, "../neuralsd")
-from iterative_nsd import IterativeNSD
+from iterative_gsd import IterativeGSD
 
 sys.path.append("..")
 import bootstrap
@@ -20,8 +20,8 @@ import bootstrap
 dataset = sys.argv[1]
 iteration = int(sys.argv[2])
 
-if bootstrap.already_done("NSD", dataset, iteration):
-    print(f"NSD {dataset} iteration {iteration} already done")
+if bootstrap.already_done("GSD", dataset, iteration):
+    print(f"GSD {dataset} iteration {iteration} already done")
     sys.exit(0)
 
 if torch.cuda.is_available():
@@ -36,27 +36,27 @@ bootstrap.set_seed(seed)
 
 # %%
 if dataset == "synthetic":
-    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
+    gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
     fit_params = {"max_iterations": 10}
 elif dataset == "polluted_synthetic":
-    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
+    gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
     fit_params = {"max_iterations": 10, "min_quality": 10}
 elif dataset == "Facebook":
-    nsd = IterativeNSD(k, "WRAcc")
+    gsd = IterativeGSD(k, "WRAcc")
     fit_params = {"batch_size": 1024, "max_iterations": 10, "min_quality": 0.01}
 elif dataset == "brca_n":
-    nsd = IterativeNSD(k, "Qc", additional_params_for_quality_measure={"c": 0.5})
+    gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": 0.5})
     fit_params = {"max_iterations": 10, "min_quality": 10}
 
 # %%
 t0 = time.time()
 cpu_t0 = time.process_time()
-nsd.fit(train, target, weight_init="best", verbose=False, **fit_params)
+gsd.fit(train, target, weight_init="best", verbose=False, **fit_params)
 time_taken = time.time() - t0
 cpu_time_taken = time.process_time() - cpu_t0
 
 # %%
 # Each description is a list of (attribute, value) selectors
-descriptions = [d[0] for d in nsd.get_subgroup_descriptions()]
+descriptions = [d[0] for d in gsd.get_subgroup_descriptions()]
 
-bootstrap.save_result("NSD", dataset, iteration, seed, time_taken, cpu_time_taken, descriptions, train, test, target)
+bootstrap.save_result("GSD", dataset, iteration, seed, time_taken, cpu_time_taken, descriptions, train, test, target)

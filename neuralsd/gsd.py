@@ -5,7 +5,7 @@ from selector_matrix import SelectorMatrix
 
 ##TODO: Change measures code to match the library when adding the algorithm to the library
 
-class NeuralSD:
+class GradientSD:
 
     available_quality_measures = ["PPV", "WRAcc", "Qc", "Qg"]
 
