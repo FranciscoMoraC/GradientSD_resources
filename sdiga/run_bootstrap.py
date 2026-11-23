@@ -9,7 +9,8 @@ import os
 import sys
 import time
 
-from subgroups.algorithms.subgroup_sets.sdiga import SDIGA
+# Modified SDIGA used in the paper (sdiga/sdiga.py), not the one of the subgroups library
+from sdiga import SDIGA
 
 sys.path.append("..")
 import bootstrap

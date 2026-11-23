@@ -95,7 +95,7 @@ setuptools==78.1.0
 six @ file:///home/conda/feedstock_root/build_artifacts/six_1733380938961/work
 stack_data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1733569443808/work
 statsmodels==0.14.5
-subgroups==0.1.10
+subgroups==0.1.11
 sympy==1.13.1
 tabulate==0.9.0
 tensorboard==2.20.0

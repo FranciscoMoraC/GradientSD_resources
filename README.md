@@ -14,6 +14,8 @@ The `Hyperparameter selection.pdf` file contains the hyperparameter grid and the
 
 The `main.py` and `main_sdiga.py` files include code for running BSD and SDIGA and importing the data for both experiments.
 
+The `sdiga/sdiga.py` file contains the modified version of SDIGA used in the experiments. It is based on the implementation of the [subgroups](https://github.com/antoniolopezmc/subgroups) library (v0.1.11) and adds a maximum pattern size for the chromosomes of the initial population, a maximum number of subgroups to return, and a stopping condition when the best chromosome is empty, along with some performance improvements. Both `main_sdiga.py` and `sdiga/run_bootstrap.py` import this version instead of the one included in the library, so it runs on top of `subgroups==0.1.11` (the version listed in `requirements.txt` and used in the experiments).
+
 A `requierements.txt` file is included with the used libraries and their versions. We recommend using a virtual environment to install the dependencies.
 
 ```

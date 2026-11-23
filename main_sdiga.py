@@ -3,7 +3,6 @@ from subgroups.algorithms.subgroup_sets.bsd import BSD
 from subgroups.algorithms.subgroup_sets.qfinder import QFinder
 from subgroups.algorithms.subgroup_sets.sdmapstar import SDMapStar
 from subgroups.algorithms.subgroup_sets.vlsd import VLSD
-from subgroups.algorithms.subgroup_sets.sdiga import SDIGA
 from subgroups.quality_measures.wracc import WRAcc
 from subgroups.quality_measures.wracc_optimistic_estimate_1 import WRAccOptimisticEstimate1
 from subgroups.quality_measures.binomial_test import BinomialTest
@@ -20,6 +19,11 @@ import time
 import random 
 import psutil
 import argparse
+import sys
+
+# Modified SDIGA used in the paper (sdiga/sdiga.py), not the one of the subgroups library
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "sdiga"))
+from sdiga import SDIGA
 
 quality_models = ["BSD","SDMapStar","VLSD"]
 
