@@ -1,15 +1,6 @@
-"""Functions shared by the bootstrap scripts of every algorithm (<algorithm>/run_bootstrap.py).
-
-Each of those scripts runs ONE bootstrap iteration of one algorithm on one dataset:
-    1. load_dataset() and bootstrap_sample() give the bootstrap sample (train) and the
-       out-of-bag rows (test),
-    2. the algorithm is fitted on train,
-    3. save_result() computes Youden's index of the discovered subgroups on train and
-       test and writes it to bootstrap_results/<algorithm>/<dataset>/iteration_<i>.json.
-
-The bootstrap sample of an iteration only depends on the dataset and the iteration
-number, so every algorithm is evaluated on exactly the same samples.
-"""
+# Common functions for the bootstrap evaluation (<algorithm>/run_bootstrap.py scripts).
+# The bootstrap sample of an iteration only depends on the dataset and the iteration,
+# so all the algorithms are evaluated on the same samples.
 
 import json
 import os
@@ -19,11 +10,10 @@ import numpy as np
 import pandas as pd
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-# BOOTSTRAP_RESULTS_DIR allows re-running an algorithm without overwriting the stored results
 RESULTS_DIR = os.environ.get("BOOTSTRAP_RESULTS_DIR", os.path.join(ROOT, "bootstrap_results"))
 SEED = 42
 
-# Dataset name: (file in the data folder, target column, positive value)
+# file in data/, target column and positive value
 DATASETS = {
     "synthetic": ("synthetic3_all.csv", "Target", "1"),
     "polluted_synthetic": ("synthetic3-5_all.csv", "Target", "1"),
@@ -33,27 +23,17 @@ DATASETS = {
 
 
 def load_dataset(dataset):
-    """Read a dataset with every value as a string, as in the run_<dataset>.py scripts."""
     file_name, target_column, target_value = DATASETS[dataset]
-    df = pd.read_csv(os.path.join(ROOT, "data", file_name))
-    df = df.astype(str)
+    df = pd.read_csv(os.path.join(ROOT, "data", file_name)).astype(str)
     df.columns = [str(c) for c in df.columns]
     return df, (target_column, target_value)
 
 
 def bootstrap_sample(df, target, iteration):
-    """Draw the bootstrap sample of an iteration.
-
-    Positive and negative rows are resampled with replacement separately, so the
-    sample keeps the class proportions of the dataset. Returns:
-        train: the bootstrap sample (same size as df, with repeated rows),
-        test: the out-of-bag rows, i.e. the rows not drawn in train,
-        seed: seed for the randomness of the algorithm in this iteration.
-    """
+    """Stratified bootstrap sample (train), out-of-bag rows (test) and a seed for the algorithm."""
     rng = np.random.default_rng([SEED, iteration])
     rows = np.arange(len(df))
     positive = (df[target[0]] == target[1]).to_numpy()
-
     train_rows = np.concatenate([
         rng.choice(rows[positive], size=positive.sum(), replace=True),
         rng.choice(rows[~positive], size=(~positive).sum(), replace=True),
@@ -61,10 +41,7 @@ def bootstrap_sample(df, target, iteration):
     train_rows = rng.permutation(train_rows)
     test_rows = np.setdiff1d(rows, train_rows)
     seed = int(rng.integers(0, 2**31 - 1))
-
-    train = df.iloc[train_rows].reset_index(drop=True)
-    test = df.iloc[test_rows].reset_index(drop=True)
-    return train, test, seed
+    return df.iloc[train_rows].reset_index(drop=True), df.iloc[test_rows].reset_index(drop=True), seed
 
 
 def set_seed(seed):
@@ -86,7 +63,7 @@ def already_done(algorithm, dataset, iteration):
 
 
 def covers(df, description):
-    """Rows of df covered by a subgroup, given as a list of (attribute, value) selectors."""
+    """Rows covered by a subgroup given as a list of (attribute, value) selectors."""
     entry = pd.Series(True, index=df.index)
     for attribute, value in description:
         entry &= df[attribute] == value
@@ -94,7 +71,7 @@ def covers(df, description):
 
 
 def youden(df, target, descriptions):
-    """Youden's index (and its TPR and FPR) of the disjunction of the subgroups."""
+    """Youden's index, TPR and FPR of the disjunction of the subgroups."""
     covered = pd.Series(False, index=df.index)
     for description in descriptions:
         covered |= covers(df, description)
@@ -105,7 +82,6 @@ def youden(df, target, descriptions):
 
 
 def max_jaccard(df, descriptions):
-    """Largest Jaccard similarity between the rows covered by any two subgroups."""
     entries = [covers(df, description) for description in descriptions]
     maximum = 0.0
     for i in range(len(entries)):
@@ -117,16 +93,10 @@ def max_jaccard(df, descriptions):
 
 
 def save_result(algorithm, dataset, iteration, seed, time_taken, cpu_time_taken, descriptions, train, test, target):
-    """Evaluate the subgroups found in an iteration and write the result as JSON.
-
-    Youden's index is computed on train (the data used to find the subgroups) and on
-    test (the out-of-bag rows, unseen by the algorithm). cpu_time_taken is None when
-    it is not measured (MCTS4DM, an external program).
-    """
+    """Compute Youden's index in-bag (train) and out-of-bag (test) and save the result as JSON."""
     youden_train, tpr_train, fpr_train = youden(train, target, descriptions)
     youden_test, tpr_test, fpr_test = youden(test, target, descriptions)
     sizes = [len(description) for description in descriptions]
-
     result = {
         "algorithm": algorithm,
         "dataset": dataset,
@@ -147,11 +117,8 @@ def save_result(algorithm, dataset, iteration, seed, time_taken, cpu_time_taken,
         "n_oob": len(test),
         "descriptions": [[[attribute, value] for attribute, value in description] for description in descriptions],
     }
-
     path = result_path(algorithm, dataset, iteration)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f:
         json.dump(result, f, indent=1)
-
-    print(f"{algorithm} {dataset} iteration {iteration}: time={time_taken:.1f}s "
-          f"Youden in-bag={youden_train:.4f} Youden OOB={youden_test:.4f} subgroups={len(descriptions)}")
+    print(f"{algorithm} {dataset} {iteration}: time={time_taken:.1f}s Youden in-bag={youden_train:.4f} OOB={youden_test:.4f}")

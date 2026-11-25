@@ -1,15 +1,5 @@
-"""Runtime of GradientSD on CPU for the datasets of the comparison with BSD (Experiment 1).
-
-BSD runs on CPU, while the runtimes of GradientSD reported in the paper were measured on
-GPU. This script measures GradientSD on CPU, both single-threaded (same conditions as BSD)
-and using every available core, and also checks that the WRAcc found is the same as on
-GPU (GradientSD with the "best" initialization has no random component).
-
-Each configuration is repeated REPETITIONS times and the median runtime is reported.
-
-Usage (from the nsdExperiments folder):
-    python gsd_cpu_time.py
-"""
+# Runtime of GradientSD on CPU (one thread and all threads, median of 5 runs) on the datasets
+# of Experiment 1, checking that the WRAcc is the same as on GPU.
 
 import time
 

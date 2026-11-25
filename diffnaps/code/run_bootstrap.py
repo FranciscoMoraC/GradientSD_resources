@@ -1,11 +1,5 @@
-# Bootstrap evaluation of DiffNaps: runs ONE bootstrap iteration on one dataset.
-# The training configurations are the ones of conf_dict in real_exp.py.
-#
-# For brca-n, real_exp.py reads ../data/brca_processed_logtpm_balanced_75perc.tsv, which
-# holds exactly the same values and labels as data/brca_n.csv, so the common CSV is used.
-#
-# Usage (from the diffnaps/code folder):
-#     python run_bootstrap.py <dataset> <iteration>
+# Bootstrap evaluation of DiffNaps (same configurations as conf_dict in real_exp.py).
+# Usage: python run_bootstrap.py <dataset> <iteration>
 
 # %%
 import sys
@@ -24,7 +18,6 @@ dataset = sys.argv[1]
 iteration = int(sys.argv[2])
 
 if bootstrap.already_done("DiffNaps", dataset, iteration):
-    print(f"DiffNaps {dataset} iteration {iteration} already done")
     sys.exit(0)
 
 # %%

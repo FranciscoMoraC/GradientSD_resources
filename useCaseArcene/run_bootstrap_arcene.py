@@ -1,22 +1,7 @@
-"""Out-of-bag bootstrap evaluation of GradientSD and of the PCA + beam search baseline on ARCENE.
-
-Both methods are evaluated with the same protocol as the high-dimensional experiment:
-for each iteration, a stratified bootstrap sample (same size as the dataset) is drawn,
-the subgroups are discovered on it, and Youden's index of their disjunction is computed
-both on the bootstrap sample (in-bag) and on the rows not drawn (out-of-bag).
-Every method sees exactly the same samples (see ../bootstrap.py).
-The results are written to ../bootstrap_results/{GSD,PCA_Beam}/arcene/.
-
-Hyperparameters are the ones used for the single-run results reported in the paper:
-    - GradientSD: WRAcc, at most 10 subgroups, minimum quality 0.07 (run.ipynb).
-    - PCA + beam search: best configuration of pca_beam_search.py
-      (ChiSquaredQF, beam width 25, 10 subgroups, depth 3).
-For the baseline, PCA and the quantile discretization are fitted on the bootstrap
-sample only and then applied to the out-of-bag rows.
-
-Usage (from the useCaseArcene folder):
-    python run_bootstrap_arcene.py [n_iterations]
-"""
+# Bootstrap evaluation on ARCENE of GradientSD (WRAcc, at most 10 subgroups, minimum quality 0.07)
+# and of the PCA + discretization + beam search baseline, whose PCA and discretization are fitted
+# on each bootstrap sample.
+# Usage: python run_bootstrap_arcene.py [n_iterations]
 
 import os
 import sys

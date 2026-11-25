@@ -1,23 +1,6 @@
-"""Ablation of GradientSD on the datasets of the comparison with BSD (Experiment 1).
-
-For every dataset this script reports:
-    - the WRAcc of the best single selector, i.e. the starting point of GradientSD (epoch 0),
-      both on the discrete subgroup (single_selector_wracc, column "Single" of Table 1 of the
-      paper) and on the relaxed counts with the initial weights (initial_wracc, slightly lower
-      because sigma(-10) > 0 for the rest of the selectors),
-    - the WRAcc of the subgroup returned by GradientSD with the default hyperparameters,
-      computed both on the relaxed counts (as in e1.ipynb) and on the discrete subgroup
-      (selectors with sigma(theta) > 0.5), together with the number of epochs,
-    - the discrete WRAcc of GradientSD for every combination of learning rate,
-      patience and initial weight magnitude in the sensitivity grid.
-
-Results are written to ablation_e1.csv (one row per dataset) and
-ablation_e1_sensitivity.csv (one row per dataset and configuration).
-
-Usage: main.py reads the datasets from ../data relative to the working directory, so run it
-from any folder whose ../data contains them (e.g. the nsdExperiments folder):
-    python ablation_e1.py
-"""
+# Experiment 1: WRAcc of the best single selector (initial subgroup) and of GradientSD, number of
+# epochs, and sensitivity to the learning rate, the patience and the initial weight magnitude.
+# Usage (from a folder whose ../data has the datasets): python ablation_e1.py
 
 import itertools
 import os

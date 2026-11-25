@@ -1,18 +1,6 @@
-# Bootstrap evaluation of MCTS4DM: runs ONE bootstrap iteration on one dataset.
-#
-# The bootstrap sample is written in the MCTS4DM input format (as datasets/<dataset>/preproc.ipynb
-# does) and the configuration file is a copy of the original one of the dataset
-# (synthetic.conf, pollutedSynthetic.conf, Facebook.conf, brcaN.conf) where only the input
-# files and the result folder are changed.
-#
-# The labels are computed comparing the target column as a string. The preproc.ipynb notebooks
-# of synthetic, polluted_synthetic and brca_n compared an integer column with "1", which
-# produced qualities.csv files with no positive labels.
-#
-# The runtime is runtime(ms) from the info.log file written by MCTS4DM.
-#
-# Usage (from the MCTS4DM folder):
-#     python run_bootstrap.py <dataset> <iteration>
+# Bootstrap evaluation of MCTS4DM. The bootstrap sample is written in the MCTS4DM input format
+# and run with the configuration file of the dataset; the runtime is the one reported in info.log.
+# Usage: python run_bootstrap.py <dataset> <iteration>
 
 # %%
 import os
@@ -31,7 +19,6 @@ dataset = sys.argv[1]
 iteration = int(sys.argv[2])
 
 if bootstrap.already_done("MCTS4DM", dataset, iteration):
-    print(f"MCTS4DM {dataset} iteration {iteration} already done")
     sys.exit(0)
 
 # %%

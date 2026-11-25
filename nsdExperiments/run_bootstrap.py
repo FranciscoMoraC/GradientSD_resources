@@ -1,8 +1,5 @@
-# Bootstrap evaluation of GSD: runs ONE bootstrap iteration on one dataset.
-# The hyperparameters are the same ones as in run_<dataset>.py.
-#
-# Usage (from the nsdExperiments folder):
-#     python run_bootstrap.py <dataset> <iteration>
+# Bootstrap evaluation of GradientSD (same hyperparameters as run_<dataset>.py).
+# Usage: python run_bootstrap.py <dataset> <iteration>
 
 # %%
 import sys
@@ -21,7 +18,6 @@ dataset = sys.argv[1]
 iteration = int(sys.argv[2])
 
 if bootstrap.already_done("GSD", dataset, iteration):
-    print(f"GSD {dataset} iteration {iteration} already done")
     sys.exit(0)
 
 if torch.cuda.is_available():
@@ -56,7 +52,6 @@ time_taken = time.time() - t0
 cpu_time_taken = time.process_time() - cpu_t0
 
 # %%
-# Each description is a list of (attribute, value) selectors
 descriptions = [d[0] for d in gsd.get_subgroup_descriptions()]
 
 bootstrap.save_result("GSD", dataset, iteration, seed, time_taken, cpu_time_taken, descriptions, train, test, target)

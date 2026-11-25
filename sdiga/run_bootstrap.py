@@ -1,15 +1,12 @@
-# Bootstrap evaluation of SDIGA: runs ONE bootstrap iteration on one dataset.
-# The hyperparameters are the ones of run.sh, and min_confidence the one fixed in main_sdiga.py.
-#
-# Usage (from the sdiga folder):
-#     python run_bootstrap.py <dataset> <iteration>
+# Bootstrap evaluation of SDIGA (same hyperparameters as run.sh).
+# Usage: python run_bootstrap.py <dataset> <iteration>
 
 # %%
 import os
 import sys
 import time
 
-# Modified SDIGA used in the paper (sdiga/sdiga.py), not the one of the subgroups library
+# Modified version of SDIGA (sdiga.py)
 from sdiga import SDIGA
 
 sys.path.append("..")
@@ -20,7 +17,6 @@ dataset = sys.argv[1]
 iteration = int(sys.argv[2])
 
 if bootstrap.already_done("SDIGA", dataset, iteration):
-    print(f"SDIGA {dataset} iteration {iteration} already done")
     sys.exit(0)
 
 # %%

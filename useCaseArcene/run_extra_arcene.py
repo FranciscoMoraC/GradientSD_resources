@@ -1,28 +1,5 @@
-"""Additional ARCENE experiments requested in the review.
-
-Two modes:
-
-    beam         Beam search applied directly to the 26,357 selectors of the discretized
-                 dataset (no dimensionality reduction), with the same bootstrap protocol as
-                 run_bootstrap_arcene.py. Two quality measures are run: ChiSquaredQF (the
-                 configuration selected for the PCA baseline) and StandardQF(a=0.5) (the one
-                 selected for beam search in the other high-dimensional datasets); both
-                 use beam width 25, 10 subgroups and depth 3. Results go to
-                 ../bootstrap_results/{Beam_chi2,Beam_std05}/arcene/. The BEAM_DEPTH
-                 environment variable sets another maximum depth d, and the results then go
-                 to {Beam_chi2,Beam_std05}_d<d>; BEAM_PROCESSES limits the parallel processes.
-
-    permutation  Permutation test for GradientSD. In each permutation the target is
-                 shuffled over the whole dataset, a stratified bootstrap sample is drawn,
-                 and GradientSD is run with the same configuration as in
-                 run_bootstrap_arcene.py. The in-bag and out-of-bag Youden's indices and the
-                 WRAcc of the first subgroup give their null distribution in this search
-                 space. Results go to ../bootstrap_results/GSD_permutation/arcene/.
-
-Usage (from the useCaseArcene folder):
-    python run_extra_arcene.py beam
-    python run_extra_arcene.py permutation [n_permutations]
-"""
+# ARCENE: beam search on the 26,357 selectors of the discretized data (python run_extra_arcene.py beam)
+# and permutation test of GradientSD (python run_extra_arcene.py permutation [n_permutations]).
 
 import os
 import sys
@@ -43,9 +20,6 @@ BEAM_CONFIGS = {
     "Beam_chi2": ps.ChiSquaredQF,
     "Beam_std05": lambda: ps.StandardQF(0.5),
 }
-# Maximum depth of the beam search; results of a depth other than 3 get the suffix _d<depth>
-BEAM_DEPTH = int(os.environ.get("BEAM_DEPTH", 3))
-BEAM_SUFFIX = "" if BEAM_DEPTH == 3 else f"_d{BEAM_DEPTH}"
 
 
 def run_beam_iteration(job):
@@ -58,14 +32,14 @@ def run_beam_iteration(job):
     target = ps.BinaryTarget(TARGET[0], TARGET[1])
     search_space = ps.create_nominal_selectors(train, ignore=[TARGET[0]])
     task = ps.SubgroupDiscoveryTask(train, target, search_space, result_set_size=10,
-                                    depth=BEAM_DEPTH, qf=BEAM_CONFIGS[name]())
+                                    depth=3, qf=BEAM_CONFIGS[name]())
     result = ps.BeamSearch(beam_width=25).execute(task)
     time_taken, cpu_time_taken = time.time() - t0, time.process_time() - cpu_t0
     descriptions = [
         [(sel.attribute_name, sel.attribute_value) for sel in subgroup.selectors]
         for _, subgroup in result.to_descriptions()
     ]
-    bootstrap.save_result(name + BEAM_SUFFIX, DATASET, iteration, seed, time_taken, cpu_time_taken,
+    bootstrap.save_result(name, DATASET, iteration, seed, time_taken, cpu_time_taken,
                           descriptions, train, test, TARGET)
 
 
@@ -73,8 +47,8 @@ def run_beam(df):
     """Beam search is single-threaded, so the iterations run in parallel processes and its
     runtime is reported as CPU time, as for the other single-threaded baselines."""
     jobs = [(df, iteration, name) for iteration in range(30) for name in BEAM_CONFIGS
-            if not bootstrap.already_done(name + BEAM_SUFFIX, DATASET, iteration)]
-    with Pool(min(len(jobs), int(os.environ.get("BEAM_PROCESSES", 60)))) as pool:
+            if not bootstrap.already_done(name, DATASET, iteration)]
+    with Pool(min(len(jobs), 60)) as pool:
         pool.map(run_beam_iteration, jobs, chunksize=1)
 
 

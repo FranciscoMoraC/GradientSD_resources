@@ -1,161 +1,57 @@
-"""
-Grid search over pysubgroup beam search parameters on PCA-transformed ARCENE data.
-Computes the Youden index for each (measure, beam_width, n_subgroups) combination
-and saves all results to "youden_results_pca_beam_search.csv". The BEAM_DEPTHS environment
-variable (e.g. "3,5") adds the maximum depth to the grid, and the results then go to
-"youden_results_pca_beam_search_depth.csv".
-"""
+# Grid search of the PCA + discretization + beam search baseline on ARCENE (whole dataset).
 
-import os
-
-import pysubgroup as ps
-import pandas as pd
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import KBinsDiscretizer
+# %%
 from itertools import product
 
-# ---------------------------------------------------------------------------
-# 1. Load data
-# ---------------------------------------------------------------------------
-df_train = pd.read_csv("ARCENE/arcene_train.data", header=None, delim_whitespace=True)
-df_valid = pd.read_csv("ARCENE/arcene_valid.data", header=None, delim_whitespace=True)
-df = pd.concat([df_train, df_valid], ignore_index=True)
+import pandas as pd
+import pysubgroup as ps
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import KBinsDiscretizer
 
-labels_train = pd.read_csv("ARCENE/arcene_train.labels", header=None, delim_whitespace=True)
-labels_valid = pd.read_csv("arcene_valid.labels", header=None, delim_whitespace=True)
-labels = pd.concat([labels_train, labels_valid], ignore_index=True)
+df = pd.concat([pd.read_csv("ARCENE/arcene_train.data", header=None, sep=r"\s+"),
+                pd.read_csv("ARCENE/arcene_valid.data", header=None, sep=r"\s+")], ignore_index=True)
+labels = pd.concat([pd.read_csv("ARCENE/arcene_train.labels", header=None, sep=r"\s+"),
+                    pd.read_csv("arcene_valid.labels", header=None, sep=r"\s+")], ignore_index=True)
 
-df["Target"] = labels
+pca_dataset = pd.DataFrame(KBinsDiscretizer(n_bins=4, encode="ordinal", strategy="quantile")
+                           .fit_transform(PCA().fit_transform(df)))
+pca_dataset["Target"] = labels[0]
+pca_dataset = pca_dataset.astype(str)
 target_tuple = ("Target", "1")
 
-# ---------------------------------------------------------------------------
-# 2. PCA + discretization (done once, shared across all grid cells)
-# ---------------------------------------------------------------------------
-pca = PCA()
-transformed_data = pca.fit_transform(df.drop(columns=["Target"]))
 
-pca_dataset = pd.DataFrame(
-    KBinsDiscretizer(n_bins=4, encode="ordinal", strategy="quantile")
-    .fit_transform(transformed_data)
-)
-pca_dataset["Target"] = df["Target"]
-pca_dataset = pca_dataset.astype(str)
-
-# ---------------------------------------------------------------------------
-# 3. Helper: compute Youden index from a list of subgroup descriptions
-# ---------------------------------------------------------------------------
-def compute_youden(pca_dataset: pd.DataFrame, descriptions: list[list[str]], target_tuple: tuple) -> float:
-    """
-    Compute the Youden index (sensitivity + specificity - 1) for the union of
-    the discovered subgroups.
-
-    Parameters
-    ----------
-    pca_dataset   : dataset with string-typed columns including the target.
-    descriptions  : list of subgroups, each represented as a list of
-                    "attr == val" selector strings.
-    target_tuple  : (column_name, positive_value) pair.
-
-    Returns
-    -------
-    Youden index as a float.
-    """
-    target_col, target_val = target_tuple
-    target_row = pca_dataset[target_col] == target_val
-
-    # Build the union mask over all subgroups
-    global_entry = pd.Series(False, index=pca_dataset.index)
-    for subgroup in descriptions:
-        entry = pd.Series(True, index=pca_dataset.index)
-        for selector in subgroup:
-            attr, val = selector.split("==")
-            val = val.strip().strip("'").strip('"')
-            attr = eval(attr.strip())           # column index (int)
-            entry = entry & (pca_dataset[attr] == val)
-        global_entry = global_entry | entry
-
-    sensitivity = sum(global_entry & target_row) / sum(target_row)
-    false_positive_rate = sum(global_entry & ~target_row) / sum(~target_row)
-    return sensitivity - false_positive_rate
+def youden(data, descriptions):
+    """Youden's index of the disjunction of the subgroups (pysubgroup string descriptions)."""
+    positive = data[target_tuple[0]] == target_tuple[1]
+    covered = pd.Series(False, index=data.index)
+    for description in descriptions:
+        entry = pd.Series(True, index=data.index)
+        for selector in description.split(" AND "):
+            attr, value = selector.split("==")
+            entry &= data[int(attr.strip())] == value.strip().strip("'").strip('"')
+        covered |= entry
+    return (covered & positive).sum() / positive.sum() - (covered & ~positive).sum() / (~positive).sum()
 
 
-# ---------------------------------------------------------------------------
-# 4. Grid search parameters
-# ---------------------------------------------------------------------------
-measures = {
-    "ChiSquaredQF":   ps.ChiSquaredQF(),
-    "StandardQF_0.5": ps.StandardQF(0.5),
-    "StandardQF_1.0": ps.StandardQF(1.0),
-}
+# %%
+measures = {"ChiSquaredQF": ps.ChiSquaredQF(), "StandardQF_0.5": ps.StandardQF(0.5), "StandardQF_1.0": ps.StandardQF(1.0)}
+beam_widths = [10, 25, 100, 250]
+n_subgroups = [3, 5, 10, 20, 50]
+depths = [3, 5]
 
-beam_widths   = [10, 25, 100, 250]
-n_subgroups   = [3, 5, 10, 20, 50]
-depths        = [int(d) for d in os.environ.get("BEAM_DEPTHS", "3").split(",")]
-
-# Pre-build the search space (same for every run)
-target = ps.BinaryTarget(target_tuple[0], target_tuple[1])
+target = ps.BinaryTarget(*target_tuple)
 search_space = ps.create_nominal_selectors(pca_dataset, ignore=[target_tuple[0]])
-
-# ---------------------------------------------------------------------------
-# 5. Run grid search
-# ---------------------------------------------------------------------------
 records = []
-total = len(measures) * len(beam_widths) * len(n_subgroups) * len(depths)
-run = 0
-
-for (measure_name, quality_measure), beam_width, num_subgroups, depth in product(
-    measures.items(), beam_widths, n_subgroups, depths
-):
-    run += 1
-    print(
-        f"[{run}/{total}] measure={measure_name}, beam_width={beam_width}, "
-        f"n_subgroups={num_subgroups}, depth={depth} ...",
-        end=" ",
-        flush=True,
-    )
-
+for (measure, qf), beam_width, num_subgroups, depth in product(measures.items(), beam_widths, n_subgroups, depths):
     if num_subgroups > beam_width:
-        print("SKIPPED (n_subgroups > beam_width)")
         continue
-
-    # Build and execute the task
-    task = ps.SubgroupDiscoveryTask(
-        pca_dataset,
-        target,
-        search_space,
-        result_set_size=num_subgroups,
-        depth=depth,
-        qf=quality_measure,
-    )
+    task = ps.SubgroupDiscoveryTask(pca_dataset, target, search_space, result_set_size=num_subgroups, depth=depth, qf=qf)
     result = ps.BeamSearch(beam_width=beam_width).execute(task)
-    results_df = result.to_dataframe()
+    descriptions = [str(d) for d in result.to_dataframe()["subgroup"]]
+    records.append({"measure": measure, "beam_width": beam_width, "n_subgroups": num_subgroups,
+                    "depth": depth, "youden": youden(pca_dataset, descriptions)})
 
-    # Parse subgroup descriptions into lists of selectors
-    descriptions = [
-        [s for s in str(desc).split(" AND ")]
-        for desc in results_df["subgroup"].to_list()
-    ]
-
-    # Compute Youden index
-    youden = compute_youden(pca_dataset, descriptions, target_tuple)
-    print(f"Youden = {youden:.4f}")
-
-    records.append(
-        {
-            "measure":      measure_name,
-            "beam_width":   beam_width,
-            "n_subgroups":  num_subgroups,
-            "depth":        depth,
-            "youden":       youden,
-        }
-    )
-
-# ---------------------------------------------------------------------------
-# 6. Save results
-# ---------------------------------------------------------------------------
-output_df = pd.DataFrame(records)
-output_path = ("youden_results_pca_beam_search.csv" if depths == [3]
-               else "youden_results_pca_beam_search_depth.csv")
-output_df.to_csv(output_path, index=False)
-print(f"\nResults saved to '{output_path}'.")
-print(output_df.sort_values("youden", ascending=False).to_string(index=False))
+# %%
+results = pd.DataFrame(records)
+results.to_csv("youden_results_pca_beam_search.csv", index=False)
+print(results.sort_values("youden", ascending=False).head(10).to_string(index=False))

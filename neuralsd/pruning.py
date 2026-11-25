@@ -1,22 +1,15 @@
-"""Post-hoc pruning of subgroup descriptions found by GradientSD.
-
-GradientSD has no incentive to drop selectors that barely change the coverage (e.g.,
-absence conditions on sparse binary attributes that most instances satisfy), so its
-descriptions may contain redundant selectors. This step removes every selector whose
-removal does not change the set of instances covered by the subgroup on the discovery
-data. The in-sample coverage, and hence every in-sample quality measure, is unchanged.
-"""
+# Post-hoc pruning of GradientSD subgroups: removes the selectors whose removal does not
+# change the instances covered by the subgroup on the discovery data.
 
 import numpy as np
 
 
 def prune_description(df, description):
-    """Remove the selectors of a description whose removal does not change its coverage on df.
+    """Prune a description (list of (attribute, value) selectors) on df.
 
-    df is a pandas DataFrame and description a list of (attribute, value) selectors.
-    fails[v] counts the selectors of the current description that row v does not satisfy,
-    so v is covered iff fails[v] == 0; removing selector j changes the coverage iff some
-    row fails only j. Selectors satisfied by more rows (less informative) are tried first.
+    fails[v] is the number of selectors not satisfied by row v, so a selector can be
+    removed if no row fails only that selector. The selectors satisfied by more rows
+    are tried first.
     """
     if not description:
         return list(description)
@@ -31,5 +24,4 @@ def prune_description(df, description):
 
 
 def prune_subgroups(df, descriptions):
-    """Prune every description of a subgroup set on the discovery data df."""
     return [prune_description(df, description) for description in descriptions]
