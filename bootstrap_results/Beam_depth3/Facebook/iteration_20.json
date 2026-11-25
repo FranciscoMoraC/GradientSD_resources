@@ -1,0 +1,20 @@
+{
+ "algorithm": "Beam_depth3",
+ "dataset": "Facebook",
+ "iteration": 20,
+ "seed": 230031805,
+ "time_s": 2050.6162524223328,
+ "cpu_time_s": 2050.525410864,
+ "youden_in_bag": 0.2956073698107014,
+ "tpr_in_bag": 0.9888081395348836,
+ "fpr_in_bag": 0.6932007697241822,
+ "youden_oob": 0.2931594982395775,
+ "tpr_oob": 0.9924393155590928,
+ "fpr_oob": 0.6992798173195152,
+ "n_subgroups": 3,
+ "avg_size": 3.0,
+ "max_jaccard": 0.9304775687409552,
+ "n_in_bag": 22470,
+ "n_oob": 8206,
+ "descriptions": null
+}

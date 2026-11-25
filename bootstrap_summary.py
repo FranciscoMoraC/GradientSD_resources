@@ -23,7 +23,7 @@ for path in glob.glob(os.path.join(RESULTS_DIR, "*", "*", "iteration_*.json")):
     result.pop("descriptions", None)
     rows.append(result)
 results = pd.DataFrame(rows)
-cpu = results["algorithm"].isin(CPU_TIME_ALGORITHMS)
+cpu = results["algorithm"].str.startswith(tuple(CPU_TIME_ALGORITHMS))
 results["runtime_s"] = results["time_s"].where(~cpu, results["cpu_time_s"])
 
 # %%
