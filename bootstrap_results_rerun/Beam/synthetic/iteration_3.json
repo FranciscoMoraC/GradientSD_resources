@@ -1,0 +1,653 @@
+{
+ "algorithm": "Beam",
+ "dataset": "synthetic",
+ "iteration": 3,
+ "seed": 1197881426,
+ "time_s": 1431.9766852855682,
+ "cpu_time_s": 1431.946212671,
+ "youden_in_bag": 0.841,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.159,
+ "youden_oob": 0.8270469181232751,
+ "tpr_oob": 1.0,
+ "fpr_oob": 0.17295308187672492,
+ "n_subgroups": 50,
+ "avg_size": 2.66,
+ "max_jaccard": 1.0,
+ "n_in_bag": 7000,
+ "n_oob": 2555,
+ "descriptions": [
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "col_532",
+    "2"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "col_944",
+    "3"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "col_944",
+    "3"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "col_944",
+    "3"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "col_686",
+    "0"
+   ]
+  ]
+ ]
+}

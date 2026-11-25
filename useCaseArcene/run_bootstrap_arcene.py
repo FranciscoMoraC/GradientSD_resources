@@ -36,7 +36,6 @@ from iterative_gsd import IterativeGSD
 
 DATASET = "arcene"
 TARGET = ("Target", "1")
-N_ITERATIONS = int(sys.argv[1]) if len(sys.argv) > 1 else 30
 
 
 def load_discretized():
@@ -122,7 +121,8 @@ def main():
         torch.set_default_device("cuda:0")
     df = load_discretized()
     raw = load_raw()
-    for iteration in range(N_ITERATIONS):
+    n_iterations = int(sys.argv[1]) if len(sys.argv) > 1 else 30
+    for iteration in range(n_iterations):
         train_rows, test_rows, seed = bootstrap_rows(df, iteration)
         run_gradientsd(df, train_rows, test_rows, seed, iteration)
         run_pca_beam(df, raw, train_rows, test_rows, seed, iteration)

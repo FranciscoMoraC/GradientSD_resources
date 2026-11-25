@@ -1,0 +1,353 @@
+{
+ "algorithm": "Beam",
+ "dataset": "polluted_synthetic",
+ "iteration": 23,
+ "seed": 900515058,
+ "time_s": 1059.8684720993042,
+ "cpu_time_s": 1059.853229737,
+ "youden_in_bag": 0.5294525669906834,
+ "tpr_in_bag": 0.600944182171619,
+ "fpr_in_bag": 0.07149161518093557,
+ "youden_oob": 0.5355625693081976,
+ "tpr_oob": 0.6157894736842106,
+ "fpr_oob": 0.08022690437601297,
+ "n_subgroups": 20,
+ "avg_size": 3.65,
+ "max_jaccard": 1.0,
+ "n_in_bag": 7000,
+ "n_oob": 2564,
+ "descriptions": [
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 4",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "0"
+   ],
+   [
+    "Attribute 3",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 6",
+    "0"
+   ],
+   [
+    "Attribute 5",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ]
+ ]
+}

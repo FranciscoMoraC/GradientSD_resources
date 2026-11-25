@@ -1,0 +1,107 @@
+{
+ "algorithm": "GSD",
+ "dataset": "polluted_synthetic",
+ "iteration": 4,
+ "seed": 1253387293,
+ "time_s": 56.0526282787323,
+ "cpu_time_s": 56.069217395,
+ "youden_in_bag": 0.8019422541170814,
+ "tpr_in_bag": 0.9019716745348514,
+ "fpr_in_bag": 0.10002942041776994,
+ "youden_oob": 0.777904993298788,
+ "tpr_oob": 0.8956456456456456,
+ "fpr_oob": 0.1177406523468576,
+ "n_subgroups": 7,
+ "avg_size": 2.5714285714285716,
+ "max_jaccard": 0.8197802197802198,
+ "n_in_bag": 7000,
+ "n_oob": 2589,
+ "descriptions": [
+  [
+   [
+    "Attribute 6",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ],
+   [
+    "Attribute 4",
+    "0"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "col_695",
+    "3"
+   ],
+   [
+    "col_1525",
+    "0"
+   ],
+   [
+    "col_1726",
+    "4"
+   ]
+  ],
+  [
+   [
+    "Attribute 5",
+    "1"
+   ],
+   [
+    "col_104",
+    "0"
+   ],
+   [
+    "col_222",
+    "0"
+   ],
+   [
+    "col_481",
+    "3"
+   ]
+  ]
+ ]
+}

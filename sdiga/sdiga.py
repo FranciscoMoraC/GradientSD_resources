@@ -2,7 +2,6 @@
 
 # Contributors:
 #    Iván García Alcaraz <igalcaraz19@gmail.com>
-#    Francisco Mora-Caselles <fmora@um.es>
 
 """This file contains the implementation of the SDIGA algorithm.
 

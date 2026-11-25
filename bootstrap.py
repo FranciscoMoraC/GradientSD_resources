@@ -19,7 +19,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(ROOT, "bootstrap_results")
+# BOOTSTRAP_RESULTS_DIR allows re-running an algorithm without overwriting the stored results
+RESULTS_DIR = os.environ.get("BOOTSTRAP_RESULTS_DIR", os.path.join(ROOT, "bootstrap_results"))
 SEED = 42
 
 # Dataset name: (file in the data folder, target column, positive value)

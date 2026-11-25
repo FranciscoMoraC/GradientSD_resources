@@ -1,0 +1,5 @@
+Dataset,Quality measure,Beam width,Number of subgroups,Depth,Youden
+Facebook,standardQF_1.0,100,3,5,0.3697915889732536
+brca_n,standardQF_1.0,250,3,5,0.9565217391304348
+polluted_synthetic,standardQF_0.5,100,20,3,0.7579248366013072
+synthetic,standardQF_0.5,100,20,3,1.0

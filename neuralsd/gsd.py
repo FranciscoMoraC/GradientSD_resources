@@ -79,6 +79,8 @@ class GradientSD:
             global_target = self.target.clone().detach()
         t0 = time.time()
         self.quality_records = []
+        self.initial_quality = quality.clone().detach()
+        self.epochs_run = 0
         for epoch in range(1, epochs+1):
             # When not using mini-batches, the entire dataset is used in each epoch
             if batch_size is None:
@@ -103,6 +105,7 @@ class GradientSD:
                 self.N = global_selector_matrix.shape[1]
                 self.FP = self.N - self.TP
                 new_quality = self.forward()
+            self.epochs_run = epoch
             if (new_quality-quality < 1e-10).all():
                 curr_patience -= 1
                 if curr_patience == 0:
@@ -153,7 +156,9 @@ class GradientSD:
 
     """Initialize each subgroup using the best selectors based on the quality measure. Each subgroup is initialized with one of the top k selectors.
     
-    :param additional_parameters: A dictionary. It does not need to contain any keys.
+    :param additional_parameters: A dictionary. It may contain the following keys:
+        - n: initialize the top n selectors with weight 0 in every subgroup instead of one selector per subgroup.
+        - value: absolute value of the initial weights (default 10): +value for the best selector, -value for the rest.
     """
     def _best_selectors_init(self, additional_parameters = dict()):
         x = self._selector_matrix.matrix
@@ -175,13 +180,14 @@ class GradientSD:
         else:
             best_indices = torch.topk(quality, self._k)[1]
         # Initialize W with the k best selectors only
-        self.W = torch.full((self._selectors, self._k), -10.0)
+        init_value = float(additional_parameters.get("value", 10.0))
+        self.W = torch.full((self._selectors, self._k), -init_value)
         if "n" in additional_parameters:
             for p in best_indices:
                 self.W[p, :] = 0
         else:
             for idx, p in enumerate(best_indices):
-                self.W[p, idx] = 10
+                self.W[p, idx] = init_value
 
     def forward(self, report_tp_fp=False):
         X = self._selector_matrix.matrix.unsqueeze(0).expand(self._k, -1, -1).transpose(0, 1)

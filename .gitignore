@@ -3,3 +3,5 @@ MCTS4DM/datasets
 rrl/dataset
 dssdSrc/data/datasets
 __pycache__/
+/bootstrap_results_rerun/*.log
+/useCaseArcene/*.log

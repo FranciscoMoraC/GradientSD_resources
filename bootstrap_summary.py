@@ -22,6 +22,8 @@ METRICS = ["youden_in_bag", "youden_oob", "runtime_s", "n_subgroups", "avg_size"
 # %%
 rows = []
 for path in glob.glob(os.path.join(RESULTS_DIR, "*", "*", "iteration_*.json")):
+    if "permutation" in path:
+        continue
     with open(path) as f:
         result = json.load(f)
     result.pop("descriptions", None)

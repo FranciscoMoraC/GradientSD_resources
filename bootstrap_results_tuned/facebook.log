@@ -1,0 +1,74 @@
+mar 24 nov 2026 17:33:19 CET search finished for Facebook; completing failed runs
+Depth                      3         5
+Dataset                               
+Facebook            0.300537  0.369792
+brca_n              0.869565  0.956522
+polluted_synthetic  0.757925  0.757925
+synthetic           1.000000  1.000000
+           Dataset Quality measure  Beam width  Number of subgroups  Depth   Youden
+          Facebook  standardQF_1.0         100                    3      5 0.369792
+            brca_n  standardQF_1.0         250                    3      5 0.956522
+polluted_synthetic  standardQF_0.5         100                   20      3 0.757925
+         synthetic  standardQF_0.5         100                   20      3 1.000000
+mar 24 nov 2026 17:33:47 CET start Facebook
+Terminated
+!!! beam Facebook 6 failed
+Terminated
+!!! beam Facebook 7 failed
+Terminated
+!!! beam Facebook 3 failed
+Terminated
+!!! beam Facebook 2 failed
+Terminated
+!!! beam Facebook 1 failed
+Terminated
+!!! beam Facebook 0 failed
+Terminated
+!!! beam Facebook 8 failed
+Terminated
+!!! beam Facebook 9 failed
+Terminated
+!!! beam Facebook 5 failed
+Terminated
+!!! beam Facebook 4 failed
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 11: time=4773.6s Youden in-bag=0.3643 Youden OOB=0.3612 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 10: time=4845.9s Youden in-bag=0.3916 Youden OOB=0.3912 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 16: time=4322.1s Youden in-bag=0.3725 Youden OOB=0.3670 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 12: time=4361.1s Youden in-bag=0.3896 Youden OOB=0.3979 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 14: time=4688.1s Youden in-bag=0.3706 Youden OOB=0.3724 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 20: time=4729.5s Youden in-bag=0.3950 Youden OOB=0.3937 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 18: time=4779.6s Youden in-bag=0.3745 Youden OOB=0.3629 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 17: time=5400.1s Youden in-bag=0.3682 Youden OOB=0.3744 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 15: time=5417.7s Youden in-bag=0.4018 Youden OOB=0.3808 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 13: time=5438.0s Youden in-bag=0.3726 Youden OOB=0.3646 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 21: time=5456.8s Youden in-bag=0.3651 Youden OOB=0.3717 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 19: time=5529.7s Youden in-bag=0.3568 Youden OOB=0.3601 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 23: time=4789.9s Youden in-bag=0.3697 Youden OOB=0.3646 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 22: time=5451.5s Youden in-bag=0.3639 Youden OOB=0.3774 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 25: time=4277.3s Youden in-bag=0.3648 Youden OOB=0.3761 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 26: time=4276.1s Youden in-bag=0.3745 Youden OOB=0.3628 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 24: time=4882.7s Youden in-bag=0.3661 Youden OOB=0.3813 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 27: time=4965.2s Youden in-bag=0.3684 Youden OOB=0.3679 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 29: time=4397.3s Youden in-bag=0.3737 Youden OOB=0.3706 subgroups=3
+Beam Facebook: standardQF_1.0, beam width 100, 3 subgroups, depth 5
+Beam Facebook iteration 28: time=5055.8s Youden in-bag=0.3674 Youden OOB=0.3719 subgroups=3
+mar 24 nov 2026 21:26:09 CET end Facebook

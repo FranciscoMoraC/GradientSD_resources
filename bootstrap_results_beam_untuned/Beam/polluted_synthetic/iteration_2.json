@@ -1,0 +1,20 @@
+{
+ "algorithm": "Beam",
+ "dataset": "polluted_synthetic",
+ "iteration": 2,
+ "seed": 945111496,
+ "time_s": 465.3039379119873,
+ "cpu_time_s": 465.27170386,
+ "youden_in_bag": 0.7919285275844807,
+ "tpr_in_bag": 0.89225215217995,
+ "fpr_in_bag": 0.1003236245954692,
+ "youden_oob": 0.7770401695080542,
+ "tpr_oob": 0.8910963944076526,
+ "fpr_oob": 0.1140562248995984,
+ "n_subgroups": 20,
+ "avg_size": 2.65,
+ "max_jaccard": 1.0,
+ "n_in_bag": 7000,
+ "n_oob": 2604,
+ "descriptions": null
+}

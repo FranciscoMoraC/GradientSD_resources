@@ -1,8 +1,12 @@
 """
 Grid search over pysubgroup beam search parameters on PCA-transformed ARCENE data.
 Computes the Youden index for each (measure, beam_width, n_subgroups) combination
-and saves all results to "youden_results_pca_beam_search.csv".
+and saves all results to "youden_results_pca_beam_search.csv". The BEAM_DEPTHS environment
+variable (e.g. "3,5") adds the maximum depth to the grid, and the results then go to
+"youden_results_pca_beam_search_depth.csv".
 """
+
+import os
 
 import pysubgroup as ps
 import pandas as pd
@@ -86,6 +90,7 @@ measures = {
 
 beam_widths   = [10, 25, 100, 250]
 n_subgroups   = [3, 5, 10, 20, 50]
+depths        = [int(d) for d in os.environ.get("BEAM_DEPTHS", "3").split(",")]
 
 # Pre-build the search space (same for every run)
 target = ps.BinaryTarget(target_tuple[0], target_tuple[1])
@@ -95,16 +100,16 @@ search_space = ps.create_nominal_selectors(pca_dataset, ignore=[target_tuple[0]]
 # 5. Run grid search
 # ---------------------------------------------------------------------------
 records = []
-total = len(measures) * len(beam_widths) * len(n_subgroups)
+total = len(measures) * len(beam_widths) * len(n_subgroups) * len(depths)
 run = 0
 
-for (measure_name, quality_measure), beam_width, num_subgroups in product(
-    measures.items(), beam_widths, n_subgroups
+for (measure_name, quality_measure), beam_width, num_subgroups, depth in product(
+    measures.items(), beam_widths, n_subgroups, depths
 ):
     run += 1
     print(
         f"[{run}/{total}] measure={measure_name}, beam_width={beam_width}, "
-        f"n_subgroups={num_subgroups} ...",
+        f"n_subgroups={num_subgroups}, depth={depth} ...",
         end=" ",
         flush=True,
     )
@@ -119,7 +124,7 @@ for (measure_name, quality_measure), beam_width, num_subgroups in product(
         target,
         search_space,
         result_set_size=num_subgroups,
-        depth=3,
+        depth=depth,
         qf=quality_measure,
     )
     result = ps.BeamSearch(beam_width=beam_width).execute(task)
@@ -140,6 +145,7 @@ for (measure_name, quality_measure), beam_width, num_subgroups in product(
             "measure":      measure_name,
             "beam_width":   beam_width,
             "n_subgroups":  num_subgroups,
+            "depth":        depth,
             "youden":       youden,
         }
     )
@@ -148,7 +154,8 @@ for (measure_name, quality_measure), beam_width, num_subgroups in product(
 # 6. Save results
 # ---------------------------------------------------------------------------
 output_df = pd.DataFrame(records)
-output_path = "youden_results_pca_beam_search.csv"
+output_path = ("youden_results_pca_beam_search.csv" if depths == [3]
+               else "youden_results_pca_beam_search_depth.csv")
 output_df.to_csv(output_path, index=False)
 print(f"\nResults saved to '{output_path}'.")
 print(output_df.sort_values("youden", ascending=False).to_string(index=False))

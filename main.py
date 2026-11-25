@@ -126,10 +126,6 @@ def get_model(model, write,database = None):
             return VLSD(quality_measure=params["quality_measure"], optimistic_estimate=params["optimistic_estimate"], q_minimum_threshold=thresh, oe_minimum_threshold=thresh, write_results_in_file=True, file_path=output_file), id
         else:
             return VLSD(quality_measure=params["quality_measure"], optimistic_estimate=params["optimistic_estimate"], q_minimum_threshold=-2, oe_minimum_threshold=-2, write_results_in_file=False), id
-    elif model == "BerryFinder":
-        return BerryFinder(max_complexity=params["max_size"], write_results_in_file=write, file_path=output_file, min_rank = params["min_rank"], 
-                   coverage_thld = params["coverage_thld"], ppv_thld = params["ppv_thld"], or_thld = params["or_thld"], p_val_thld = params["p_val_thld"], abs_contribution_thld = params["abs_contribution_thld"], contribution_thld = params["contribution_thld"]
-                   ), id
     else:
         raise ValueError("Model not recognized")
 

@@ -37,7 +37,7 @@ bootstrap.set_seed(seed)
 # %%
 if dataset == "synthetic":
     gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
-    fit_params = {"max_iterations": 10}
+    fit_params = {"max_iterations": 10, "min_quality": 10}
 elif dataset == "polluted_synthetic":
     gsd = IterativeGSD(k, "Qc", additional_params_for_quality_measure={"c": 0.9})
     fit_params = {"max_iterations": 10, "min_quality": 10}

@@ -1,0 +1,51 @@
+{
+ "algorithm": "GSD",
+ "dataset": "synthetic",
+ "iteration": 20,
+ "seed": 1351179478,
+ "time_s": 24.348639011383057,
+ "cpu_time_s": 24.351623526,
+ "youden_in_bag": 1.0,
+ "tpr_in_bag": 1.0,
+ "fpr_in_bag": 0.0,
+ "youden_oob": 1.0,
+ "tpr_oob": 1.0,
+ "fpr_oob": 0.0,
+ "n_subgroups": 3,
+ "avg_size": 2.0,
+ "max_jaccard": 0.0,
+ "n_in_bag": 7000,
+ "n_oob": 2553,
+ "descriptions": [
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 2",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ]
+  ]
+ ]
+}

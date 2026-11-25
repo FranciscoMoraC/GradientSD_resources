@@ -1,0 +1,47 @@
+{
+ "algorithm": "GSD",
+ "dataset": "polluted_synthetic",
+ "iteration": 27,
+ "seed": 1719782649,
+ "time_s": 23.069864749908447,
+ "cpu_time_s": 23.003291548,
+ "youden_in_bag": 0.730576049492316,
+ "tpr_in_bag": 0.8256039988891974,
+ "fpr_in_bag": 0.09502794939688143,
+ "youden_oob": 0.7301725997842502,
+ "tpr_oob": 0.8377777777777777,
+ "fpr_oob": 0.1076051779935275,
+ "n_subgroups": 3,
+ "avg_size": 1.6666666666666667,
+ "max_jaccard": 0.0,
+ "n_in_bag": 7000,
+ "n_oob": 2586,
+ "descriptions": [
+  [
+   [
+    "Attribute 1",
+    "1"
+   ],
+   [
+    "Attribute 3",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 4",
+    "1"
+   ],
+   [
+    "Attribute 5",
+    "1"
+   ]
+  ],
+  [
+   [
+    "Attribute 6",
+    "1"
+   ]
+  ]
+ ]
+}
