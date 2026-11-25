@@ -6,16 +6,19 @@ import pickle
 import time
 import random
 import sys
-sys.path.insert(0, '../neuralsd')
+sys.path.insert(0, '../gradientsd')
 from iterative_gsd import IterativeGSD
 
-# %%
-k = 1
+# if not torch.cuda.is_available():
+#     raise Exception("GPU not available")
 
 torch.set_default_device("cuda:0")
 
 # %%
-df = pd.read_csv("../data/synthetic3_all.csv")
+k = 1
+
+# %%
+df = pd.read_csv("../data/brca_n.csv")
 df.head()
 df = df.astype("str")
 df.columns = [str(i) for i in df.columns]
@@ -27,16 +30,30 @@ target_tuple = ("Target", "1")
 df.shape
 
 # %%
-gsd = IterativeGSD(k,"Qc",additional_params_for_quality_measure={"c": 0.9})
+gsd = IterativeGSD(k,"Qc",additional_params_for_quality_measure={"c": 0.5})
 t0 = time.time()
-gsd.fit(df, target_tuple, weight_init="best", verbose=False, max_iterations=10)
+gsd.fit(df, target_tuple, weight_init="best", verbose=False, max_iterations=10, min_quality=10)
 t1 = time.time()
 print("Time taken:", t1 - t0)
 
 # %%
-desc = gsd.get_subgroup_descriptions()
+
 
 # %%
+desc = gsd.get_subgroup_descriptions()
+# print("Quality", [quality for _, quality, tp, fp in desc])
+# print("tps", [tp for _, quality, tp, fp in desc])
+# print("fps", [fp for _, quality, tp, fp in desc])
+
+# %%
+
+# %%
+# global_tp = sum([tp for _, _, tp, _ in desc])
+# global_fp = sum([fp for _, _, _, fp in desc])
+# TP = df[(df[target_tuple[0]] == target_tuple[1])].shape[0]
+# FP = df.shape[0] - TP
+# youden = (global_tp / TP) - (global_fp / FP)
+# print("Youden's J statistic:", youden)
 
 # %%
 descriptions = [d[0] for d in desc]

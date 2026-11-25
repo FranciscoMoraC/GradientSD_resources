@@ -14,7 +14,7 @@ import torch
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import KBinsDiscretizer
 
-sys.path.insert(0, "../neuralsd")
+sys.path.insert(0, "../gradientsd")
 sys.path.append("..")
 import bootstrap
 from iterative_gsd import IterativeGSD

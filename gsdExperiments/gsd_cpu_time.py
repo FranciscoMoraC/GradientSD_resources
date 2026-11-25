@@ -9,7 +9,7 @@ import sys
 
 import torch
 
-sys.path.insert(0, "../neuralsd")
+sys.path.insert(0, "../gradientsd")
 sys.path.insert(0, "../")
 import main
 from gsd import GradientSD

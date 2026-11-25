@@ -10,7 +10,7 @@ import numpy as np
 import pysubgroup as ps
 import torch
 
-sys.path.insert(0, "../neuralsd")
+sys.path.insert(0, "../gradientsd")
 sys.path.append("..")
 import bootstrap
 from iterative_gsd import IterativeGSD

@@ -5,7 +5,7 @@
 
 DATASETS="synthetic polluted_synthetic Facebook brca_n"
 
-for folder in nsdExperiments diffnaps/code MCTS4DM beam sdiga; do
+for folder in gsdExperiments diffnaps/code MCTS4DM beam sdiga; do
     for dataset in $DATASETS; do
         for iteration in $(seq 0 29); do
             (cd $folder && python3 run_bootstrap.py $dataset $iteration)

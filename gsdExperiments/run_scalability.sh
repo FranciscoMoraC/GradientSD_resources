@@ -6,7 +6,7 @@
 # (p = 2000) and p = 8,000 (n = 7000); the last value of each axis (n = 35,000 and
 # p = 10,000) runs out of memory and marks that limit.
 #
-# Usage (from the nsd folder):
+# Usage (from the gsdExperiments folder):
 #     nohup bash run_scalability.sh > scalability.log 2>&1 &
 
 PYTHON=~/miniconda3/envs/pytorch/bin/python

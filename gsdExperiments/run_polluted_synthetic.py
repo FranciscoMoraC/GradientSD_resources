@@ -6,7 +6,7 @@ import pickle
 import time
 import random
 import sys
-sys.path.insert(0, '../neuralsd')
+sys.path.insert(0, '../gradientsd')
 from iterative_gsd import IterativeGSD
 
 # %%
@@ -15,28 +15,30 @@ k = 1
 torch.set_default_device("cuda:0")
 
 # %%
-df = pd.read_csv("../data/facebook.csv")
+df = pd.read_csv("../data/synthetic3-5_all.csv")
 df.head()
 df = df.astype("str")
 df.columns = [str(i) for i in df.columns]
-# Randomly mix the rows
-df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 # %%
-target_tuple = ("target", "government")
+target_tuple = ("Target", "1")
 
 # %%
 df.shape
 
 # %%
-gsd = IterativeGSD(k,"WRAcc")
+gsd = IterativeGSD(k,"Qc",additional_params_for_quality_measure={"c": 0.9})
 t0 = time.time()
-gsd.fit(df, target_tuple, weight_init="best", verbose=False, batch_size=1024, max_iterations=10, min_quality=0.01)
+gsd.fit(df, target_tuple, weight_init="best", verbose=False, max_iterations=10, min_quality = 10)
 t1 = time.time()
 print("Time taken:", t1 - t0)
 
 # %%
 desc = gsd.get_subgroup_descriptions()
+
+# %%
+
+# %%
 descriptions = [d[0] for d in desc]
 global_entry = pd.Series(False, index=df.index)
 num_subgroups = len(descriptions)
@@ -63,8 +65,5 @@ print("Youden's J statistic:", youden)
 print("# Subgroups:", num_subgroups)
 print("Average subgroup description length:", sum(sizes)/num_subgroups)
 print("Max Jaccard similarity between subgroups:", max_jaccard)
-
-
-
 
 

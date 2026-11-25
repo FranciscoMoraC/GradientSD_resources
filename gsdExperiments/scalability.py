@@ -10,7 +10,7 @@ in the bootstrap evaluation of Synthetic (Qc with c = 0.9, "best" initialization
 Each call runs ONE configuration, so that the peak memory of the process is not affected
 by previous runs, and appends one JSON line to the results file.
 
-Usage (from the nsd folder):
+Usage (from the gsdExperiments folder):
     python scalability.py <n> <p> <repetition> <results_file>
 """
 
@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-sys.path.insert(0, "../neuralsd")
+sys.path.insert(0, "../gradientsd")
 from iterative_gsd import IterativeGSD
 
 # Combinations of (Target, A1, ..., A6) in the original Synthetic dataset and their counts

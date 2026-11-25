@@ -7,7 +7,7 @@ import time
 
 import torch
 
-sys.path.insert(0, "../neuralsd")
+sys.path.insert(0, "../gradientsd")
 from iterative_gsd import IterativeGSD
 
 sys.path.append("..")

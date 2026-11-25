@@ -8,7 +8,7 @@ the min-max range as error bars. Both axes are logarithmic and a dashed line of 
 (linear growth) through the first point is drawn as reference. Configurations that ran
 out of GPU memory are marked on the x axis.
 
-Usage (from the nsd folder):
+Usage (from the gsdExperiments folder):
     python plot_scalability.py [results_file] [output_pdf]
 """
 
